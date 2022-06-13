@@ -1,13 +1,13 @@
 <template>
   <div>
-HEllo
+    footer
   </div>
 </template>
 
 <script>
-  export default {
-    name: "HelloWorld"
-  }
+export default {
+  name: "FooTer"
+}
 </script>
 
 <style scoped>

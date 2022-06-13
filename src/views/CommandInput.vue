@@ -1,13 +1,16 @@
 <template>
   <div>
-HEllo
+    commandInput
   </div>
 </template>
 
 <script>
-  export default {
-    name: "HelloWorld"
-  }
+export default {
+  name: 'CommandInput',
+
+
+
+}
 </script>
 
 <style scoped>

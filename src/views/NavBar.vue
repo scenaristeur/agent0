@@ -1,13 +1,13 @@
 <template>
   <div>
-HEllo
+    nav
   </div>
 </template>
 
 <script>
-  export default {
-    name: "HelloWorld"
-  }
+export default {
+  name: "NavBar"
+}
 </script>
 
 <style scoped>

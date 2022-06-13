@@ -1,9 +1,12 @@
-import { createStore } from 'vuex'
+import Vue from 'vue'
+import Vuex from 'vuex'
 import core from './modules/core'
 import graph3D from './modules/graph3D'
 import soukai from './modules/soukai'
 
-export default createStore({
+Vue.use(Vuex)
+
+export default new Vuex.Store({
   state: {
   },
   getters: {
@@ -13,6 +16,6 @@ export default createStore({
   actions: {
   },
   modules: {
-      core, graph3D, soukai
+    core, graph3D, soukai
   }
 })

@@ -5,11 +5,18 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "git": "npm run build && git add . && git commit -m",
+    "postgit": "git push && git subtree push --prefix dist origin gh-pages"
   },
   "dependencies": {
+    "3d-force-graph": "^1.70.10",
+    "bootstrap-vue-3": "^0.1.13",
     "core-js": "^3.8.3",
+    "node-polyfill-webpack-plugin": "^1.1.4",
     "register-service-worker": "^1.7.2",
+    "soukai": "^0.4.1",
+    "three-spritetext": "^1.6.5",
     "vue": "^3.2.13",
     "vue-router": "^4.0.3",
     "vuex": "^4.0.0"
