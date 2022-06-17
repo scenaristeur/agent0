@@ -31,11 +31,14 @@ const plugin = {
 
       let exist = await Neurone.all({ $in: [n.id] })
       if(exist.length == 0 ){
-        await Neurone.create(n).then(() => app.config.globalProperties.$soukai_findAll());
+        return  Neurone.create(n).then((neu) => {
+          console.log("created",neu)
+          app.config.globalProperties.$soukai_findAll()
+          return neu
+        })
       }else{
         console.log("exist, should update ? ", n.id)
       }
-
     }
 
     app.config.globalProperties.$soukai_findAll = async function(){
@@ -50,8 +53,50 @@ const plugin = {
       let neurone = await Neurone.find(item.id)
       await neurone.delete()
       app.config.globalProperties.$soukai_findAll()
-
     }
+
+    app.config.globalProperties.$soukaiAddTriplet = async function(t){
+      console.log(t)
+      let subjectNode = null
+      const sub = await Neurone.all({ name: t.value.subject });
+      if (sub.length != 0){
+        subjectNode= sub [0]
+      }else{
+        subjectNode = await app.config.globalProperties.$soukai_create({name: t.value.subject})
+        console.log("sub", sub)
+      }
+
+      let objectNode = null
+      const objByName = await Neurone.all({ name: t.value.object });
+      const objById  = await Neurone.all({ $in: [t.value.object] })
+      const obj = objByName.concat(objById)
+      if (obj.length != 0){
+        objectNode = obj[0]
+      }else{
+        objectNode = await app.config.globalProperties.$soukai_create({name: t.value.object})
+      }
+
+      console.log(subjectNode, objectNode)
+
+      // if (t.value.predicate.startsWith('.'))
+      // {
+      //   let p = t.value.predicate.slice(1)
+      //   let n = await app.config.globalProperties.$addProp({node: subjectNode, propertie: p, value: c.value.object})
+      //   await context.dispatch('saveNode', n)
+      //   await context.dispatch('getNodes')
+      // }
+      // else
+      // {
+      //   let objectNode = context.state.nodes.find(x => x.id == c.value.object || x.name == c.value.object)
+      //   objectNode == undefined ? objectNode = await app.config.globalProperties.$newNode({name: c.value.object}) : ""
+      //   let nodes2save  = await app.config.globalProperties.$addLink({subject: subjectNode, predicate:c.value.predicate, object:objectNode})
+      //   nodes2save.forEach(async function(n) {
+      //     await context.dispatch('saveNode', n)
+      //   });
+      //   await context.dispatch('getNodes') // pose problème de rafraichissement, certainement car on a enlevé __ob & __threeObj
+      // }
+    }
+
 
     //
     // const user = new User({

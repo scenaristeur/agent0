@@ -76,7 +76,7 @@ export default {
       let inputValue = this.main_input.trim()
       if (inputValue.length > 0){
         let inputObject = new Command({inputValue: inputValue/*, selected: this.selected*/})
-        this.$store.dispatch('core/pushCommandHistory', inputObject)
+        this.$store.dispatch('core/onCommandEnter', inputObject)
         this.main_input = inputObject.inputNew
         if(inputValue == "/h"){
           window.open("https://github.com/scenaristeur/agent/wiki", '_blank').focus();

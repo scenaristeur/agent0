@@ -11,30 +11,41 @@ const createStore = app => {
       state.search = params
       app.config.globalProperties.$updateHighlight();
     },
-    // setGunBrains(state, b){
-    //   state.gunBrains = b
-    // },
-    // async addGunBrains(state, b){
-    //   console.log(b)
-    //   const index = await state.gunBrains.findIndex(object => object.key == b.key);
-    //   console.log(index)
-    //   if (index === -1) {
-    //     let br = Object.assign({},b.node)
-    //     br.key = b.key
-    //     await state.gunBrains.push(br)
-    //     // await Vue.prototype.$gun.get(b.key).open(async (doc) => {
-    //     //   console.log("doc",b.key,  doc)
-    //     //   doc.key = b.key
-    //     //   await state.gunBrains.push(doc)
-    //     // })
-    //   }
-    // },
-    // setRootNode(state,r){
-    //   state.rootNode = r
-    // }
   }
 
   const actions = {
+    async onCommandEnter(context, c){
+
+      await app.config.globalProperties.$soukaiAddTriplet(c)
+    //   if(c.type == "triplet"){
+    //     let neurones =  context.rootState.soukai.neurones
+    // console.log(neurones)
+
+        // let subjectNode = context.state.nodes.find(x => x.name == c.value.subject)
+        // subjectNode == undefined ? subjectNode = await app.config.globalProperties.$newNode({name: c.value.subject}) : ""
+//_____
+
+      //   if (c.value.predicate.startsWith('.'))
+      //   {
+      //     let p = c.value.predicate.slice(1)
+      //     let n = await app.config.globalProperties.$addProp({node: subjectNode, propertie: p, value: c.value.object})
+      //     await context.dispatch('saveNode', n)
+      //     await context.dispatch('getNodes')
+      //   }
+      //   else
+      //   {
+      //     let objectNode = context.state.nodes.find(x => x.id == c.value.object || x.name == c.value.object)
+      //     objectNode == undefined ? objectNode = await app.config.globalProperties.$newNode({name: c.value.object}) : ""
+      //     let nodes2save  = await app.config.globalProperties.$addLink({subject: subjectNode, predicate:c.value.predicate, object:objectNode})
+      //     nodes2save.forEach(async function(n) {
+      //       await context.dispatch('saveNode', n)
+      //     });
+      //     await context.dispatch('getNodes') // pose problème de rafraichissement, certainement car on a enlevé __ob & __threeObj
+      //   }
+      // }else{
+      //   alert("your command should end with a comma")
+      // }
+    }
     // async newDoc(context){
     //   let doc = Automerge.init()
     //   context.commit('setDoc', doc)
