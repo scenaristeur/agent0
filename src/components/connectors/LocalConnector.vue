@@ -1,9 +1,9 @@
 <template>
   <div>Local Connector :
-  <b-button @click="download" size="sm" variant="primary">Download</b-button>
-  <input ref="fileUpload" type="file" multiple hidden @change="loadFiles" />
-  <b-button @click="openFileUpload()" variant="primary" size="sm">Upload Brains</b-button>
-</div>
+    <b-button @click="download" size="sm" variant="primary">Download</b-button>
+    <input ref="fileUpload" type="file" multiple hidden @change="loadFiles" />
+    <b-button @click="openFileUpload()" variant="primary" size="sm">Upload Brains</b-button>
+  </div>
 </template>
 
 <script>
@@ -19,9 +19,14 @@ export default {
     console.log(this.connector)
   },
   methods: {
-    loadFiles(event){
+    async loadFiles(event){
       const files = event.target.files
-      this.connector.upload(files)
+      for(const file of files) {
+        this.connector.upload(file, this.processFile)
+      }
+    },
+    processFile(f){
+      console.log(JSON.parse(f.result))
     },
     openFileUpload(){
       this.$refs.fileUpload.click()

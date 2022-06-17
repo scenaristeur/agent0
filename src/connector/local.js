@@ -9,8 +9,17 @@ class LocalConnector extends Base {
     super(options)
     options['type'] == undefined ? this['type'] = "LocalConnector": ""
   }
-
-  async upload(files){
+async upload (file, cb){
+  const fileReader = new FileReader()
+  fileReader.onload =cb
+  // let result = await fileReader.addEventListener('load', () => {
+  //     return  JSON.parse(fileReader.result)
+  // })
+  fileReader.readAsText(file, "UTF-8")
+  // console.log(result)
+  // return result
+}
+  async upload1(files){
     for (var i = 0; i < files.length; i++) {
       let f = files[i]
       let filename = f.name
