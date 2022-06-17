@@ -1,23 +1,43 @@
 import { Base } from "./base.js"
+import store from '@/store'
 
 export { LocalConnector }
 
 class LocalConnector extends Base {
+
   constructor(options = {}) {
     super(options)
     options['type'] == undefined ? this['type'] = "LocalConnector": ""
   }
 
-  upload(files){
-     for (var i = 0; i < files.length; i++) {
+  async upload(files){
+    for (var i = 0; i < files.length; i++) {
       let f = files[i]
       let filename = f.name
-       // var extension = f.name.split('.').pop();
+      var extension = f.name.split('.').pop();
       const fileReader = new FileReader()
       fileReader.addEventListener('load', () => {
+        var result = fileReader.result;
+        console.log(typeof result, result);
+        switch (extension) {
+          case 'json':
+          var data = JSON.parse(result)
+          console.log(data)
+          if(data.nodes != undefined){
+            console.log(data)
+            store.commit('soukai/setNeurones', data.nodes)
+            // store.commit ('graph3D/addNodes', data.nodes)
+            // store.commit('graph3D/setNeurones', data.nodes)
+            // store.commit('graph3D/addNodes', data.nodes)
+            // store.commit('graph3D/addLinks', data.links)
+          }
+          break;
+          default:
+          alert("your file must be a .json file", filename)
 
-        let result = {name: filename, result: fileReader.result}
-        console.log(result)
+        }
+        // let result = {name: filename, result: fileReader.result}
+        // console.log(result)
       })
       fileReader.readAsText(f)
     }

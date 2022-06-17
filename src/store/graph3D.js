@@ -17,6 +17,16 @@ const mutations = {
   setGraph(state, g){
     state.graph = g
   },
+  addNodes(state, nodes){
+    console.log(nodes)
+  },
+  addLinks(state, links){
+    console.log(links)
+  },
+  setNeurones(state, n){
+    console.log(n)
+    state.neurones = n
+  }
   // async addGunBrains(state, b){
   //   console.log(b)
   //   const index = await state.gunBrains.findIndex(object => object.key == b.key);
