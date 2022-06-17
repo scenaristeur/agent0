@@ -27,13 +27,15 @@ const plugin = {
     Soukai.useEngine(new LogEngine(engine));
 
     app.config.globalProperties.$soukai_create = async function(n){
-      await Neurone.create(n)
-      .then(() => Neurone.all())
-      .then(models => models.map(model => model.getAttributes()))
-      .then(neurones => {
-        console.log('neurones models', neurones)
-        app.config.globalProperties.$soukai_findAll()
-      });
+      // let exist = await Neurone.find(n.id)
+
+      let exist = await Neurone.all({ $in: [n.id] })
+      if(exist.length == 0 ){
+        await Neurone.create(n).then(() => app.config.globalProperties.$soukai_findAll());
+      }else{
+        console.log("exist, should update ? ", n.id)
+      }
+
     }
 
     app.config.globalProperties.$soukai_findAll = async function(){

@@ -1,8 +1,8 @@
 <template>
-  <div>Local Connector :
-    <b-button @click="download" size="sm" variant="primary">Download</b-button>
+  <div>Local:
+    <b-button @click="download" size="sm" variant="primary" class="ml-2">Download</b-button>
+    <b-button @click="openFileUpload()" variant="primary" size="sm" class="ml-2">Upload Brains</b-button>
     <input ref="fileUpload" type="file" multiple hidden @change="loadFiles" />
-    <b-button @click="openFileUpload()" variant="primary" size="sm">Upload Brains</b-button>
   </div>
 </template>
 
@@ -26,7 +26,13 @@ export default {
       }
     },
     processFile(f){
-      console.log(JSON.parse(f.result))
+      console.log(f)
+      console.log()
+      let g = JSON.parse(f)
+      for(let n of g.nodes){
+        this.$soukai_create(n)
+      }
+
     },
     openFileUpload(){
       this.$refs.fileUpload.click()
@@ -37,7 +43,8 @@ export default {
       let graphData = {format: "json",
       content: {
         nodes: this.$store.state.graph3D.nodes,
-        links: this.$store.state.graph3D.links
+        links: this.$store.state.graph3D.links,
+        neurones: this.$store.state.soukai.neurones
       }}
       this.connector.downloadFile(graphData)
     },
