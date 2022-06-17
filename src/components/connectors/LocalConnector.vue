@@ -39,7 +39,7 @@ export default {
     },
     download(){
       //https://github.com/scenaristeur/ipgs/blob/4436a12ccdb2b3de9c02a34fc2a699ccf9c68bf2/src/components/network/ExportModal.vue
-      console.log("download")
+      console.log("download",  this.$store.state.soukai.neurones)
       let graphData = {format: "json",
       content: {
         nodes: this.$store.state.graph3D.nodes,

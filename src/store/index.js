@@ -3,7 +3,7 @@ import core from './modules/core'
 import graph3D from './modules/graph3D'
 import soukai from './modules/soukai'
 
-export default createStore({
+export default app => createStore({
   state: {
   },
   getters: {
@@ -13,6 +13,8 @@ export default createStore({
   actions: {
   },
   modules: {
-      core, graph3D, soukai
+    core: core(app),
+    graph3D,
+    soukai
   }
 })

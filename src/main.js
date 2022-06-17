@@ -2,7 +2,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import './registerServiceWorker'
 import router from './router'
-import store from './store'
+import createStore from './store'
 import Graph3dPlugin from './plugins/graph3d-plugin';
 import SoukaiPlugin from './plugins/soukai-plugin';
 import BootstrapVue3 from 'bootstrap-vue-3'
@@ -16,6 +16,7 @@ import 'bootstrap-vue-3/dist/bootstrap-vue-3.css'
 
 
 const app = createApp(App)
+let store = createStore(app)
 app.use(store)
 app.use(router)
 // Make BootstrapVue available throughout your project
