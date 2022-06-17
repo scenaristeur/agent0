@@ -22,3 +22,6 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+# github rest api
+- https://docs.github.com/en/rest/guides/getting-started-with-the-rest-api
