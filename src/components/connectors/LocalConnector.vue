@@ -1,7 +1,9 @@
 <template>
-  <b-button @click="download">Download</b-button>
-  <b-button @click="upload">Upload</b-button>
-  {{ connector}}
+  <div>Local Connector :
+  <b-button @click="download" size="sm" variant="primary">Download</b-button>
+  <input ref="fileUpload" type="file" multiple hidden @change="loadFiles" />
+  <b-button @click="openFileUpload()" variant="primary" size="sm">Upload Brains</b-button>
+</div>
 </template>
 
 <script>
@@ -17,6 +19,13 @@ export default {
     console.log(this.connector)
   },
   methods: {
+    loadFiles(event){
+      const files = event.target.files
+      this.connector.upload(files)
+    },
+    openFileUpload(){
+      this.$refs.fileUpload.click()
+    },
     download(){
       //https://github.com/scenaristeur/ipgs/blob/4436a12ccdb2b3de9c02a34fc2a699ccf9c68bf2/src/components/network/ExportModal.vue
       console.log("download")
@@ -36,5 +45,7 @@ export default {
 </script>
 
 <style>
-
+.custom-file-input:lang(en) ~ .custom-file-label::after {
+  content: 'Uplaod a brain';
+}
 </style>

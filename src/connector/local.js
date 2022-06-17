@@ -6,13 +6,21 @@ class LocalConnector extends Base {
   constructor(options = {}) {
     super(options)
     options['type'] == undefined ? this['type'] = "LocalConnector": ""
-    // this.options = options
+  }
 
-    // this._data = Object.assign({}, modele)
-    // this["ve:created"] = Date.now()
-    // this.id = uuidv4()
-    //console.log(this)
-    // ...
+  upload(files){
+     for (var i = 0; i < files.length; i++) {
+      let f = files[i]
+      let filename = f.name
+       // var extension = f.name.split('.').pop();
+      const fileReader = new FileReader()
+      fileReader.addEventListener('load', () => {
+
+        let result = {name: filename, result: fileReader.result}
+        console.log(result)
+      })
+      fileReader.readAsText(f)
+    }
   }
 
   downloadFile(data){

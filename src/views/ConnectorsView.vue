@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <b-container>
     <h3> connectors</h3>
     <LocalConnector />
-  </div>
+  </b-container>
 </template>
 
 <script>
